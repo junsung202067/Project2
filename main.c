@@ -1,4 +1,4 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <time.h>
@@ -27,11 +27,21 @@ int main() {
   timecmp();
 }
 
-// 파일 1의 정보를 가져오는 함수 작성
-void filestat1() {}
+//파일 1의 정보를 가져오는 함수 작성
+void filestat1(){
+    if (stat("text1", &stat1) == -1){
+        printf("text1 stat error!\n");
+        exit(1);
+    }
+}
 
-// 파일 2의 정보를 가져오는 함수 작성
-void filestat2() {}
+//파일 2의 정보를 가져오는 함수 작성
+void filestat2(){
+    if (stat("text2", &stat2) == -1){
+        printf("text2 stat error!\n");
+        exit(1);
+    }
+}
 
 // 파일 1의 시간 정보를 가져오는 함수 작성
 void filetime1() {}
@@ -56,5 +66,8 @@ void blockcmp() {}
 // 두 개의 파일 수정 날짜를 비교하는 함수 작성
 void datecmp() {}
 
-// 두 개의 파일 수정 시간을 비교하는 함수 작성
-void timecmp() {}
+
+//두 개의 파일 수정 시간을 비교하는 함수 작성
+void timecmp(){
+    
+}
