@@ -1,4 +1,4 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <time.h>
@@ -27,11 +27,21 @@ int main() {
   timecmp();
 }
 
-// 파일 1의 정보를 가져오는 함수 작성
-void filestat1() {}
+//파일 1의 정보를 가져오는 함수 작성
+void filestat1(){
+    if (stat("text1", &stat1) == -1){
+        printf("text1 stat error!\n");
+        exit(1);
+    }
+}
 
-// 파일 2의 정보를 가져오는 함수 작성
-void filestat2() {}
+//파일 2의 정보를 가져오는 함수 작성
+void filestat2(){
+    if (stat("text2", &stat2) == -1){
+        printf("text2 stat error!\n");
+        exit(1);
+    }
+}
 
 // 파일 1의 시간 정보를 가져오는 함수 작성
 void filetime1() {}
@@ -40,7 +50,15 @@ void filetime1() {}
 void filetime2() {}
 
 // 두 개의 파일 크기를 비교하는 함수 작성
-void sizecmp() {}
+void sizecmp() {
+  if (stat1.st_size > stat2.st_size) {
+    printf("File 1 is larger than File 2\n");
+  } else if (stat1.st_size < stat2.st_size) {
+    printf("File 2 is larger than File 1\n");
+  } else {
+    printf("Both files are of the same size\n");
+  }
+}
 
 // 두 개의 파일 블락 수를 비교하는 함수 작성
 void blockcmp() {
@@ -54,7 +72,11 @@ void blockcmp() {
 }
 
 // 두 개의 파일 수정 날짜를 비교하는 함수 작성
-void datecmp() {}
+void datecmp() {
 
-// 두 개의 파일 수정 시간을 비교하는 함수 작성
-void timecmp() {}
+}
+
+//두 개의 파일 수정 시간을 비교하는 함수 작성
+void timecmp(){
+    
+}
