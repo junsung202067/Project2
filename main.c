@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -5,7 +6,7 @@
 #include <unistd.h>
 
 struct stat stat1, stat2;
-struct tm *time1, *time2;
+struct tm time1, time2;  // 구조체 자체로 선언해서 localtime 덮어쓰기 방지
 
 void filestat1();
 void filestat2();
@@ -43,11 +44,21 @@ void filestat2(){
     }
 }
 
-// 파일 1의 시간 정보를 가져오는 함수 작성
-void filetime1() {}
+//파일 1의 시간 정보를 가져오는 함수 작성
+void filetime1(){
+    struct tm *tmp = localtime(&stat1.st_mtime);
+    if (tmp == NULL) { printf("localtime error\n"); exit(1); }
+    
+    time1 = *tmp;
+}
 
-// 파일 2의 시간 정보를 가져오는 함수 작성
-void filetime2() {}
+//파일 2의 시간 정보를 가져오는 함수 작성
+void filetime2(){
+    struct tm *tmp = localtime(&stat2.st_mtime);
+    if (tmp == NULL) { printf("localtime error\n"); exit(1); }
+    
+    time2 = *tmp;
+}
 
 // 두 개의 파일 크기를 비교하는 함수 작성
 void sizecmp() {
